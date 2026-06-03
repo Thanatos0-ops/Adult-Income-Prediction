@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 
 # Import custom MLOps modules
-from data_validate import validate_schema
+from src.data.data_validate import validate_schema
 from models.models import get_logistic_regression_pipeline, get_random_forest_pipeline
 from models.evaluate import evaluate_pipeline, print_report
 
