@@ -36,7 +36,7 @@ def evaluate_pipeline(pipeline, X, y, n_splits=5, random_state=42):
         y_pred = pipeline.predict(X_val)
 
         # Check if model supports predict_proba for ROC_AUC
-        if hasattr(pipeline, 'predict_probba'):
+        if hasattr(pipeline, 'predict_proba'):
             y_proba = pipeline.predict_proba(X_val)[:, 1]
             metrics['roc_auc_score'].append(roc_auc_score(y_val, y_proba))
         else:
@@ -51,16 +51,22 @@ def evaluate_pipeline(pipeline, X, y, n_splits=5, random_state=42):
         print(f"Fold {fold} Complete. F1-Score: {metrics['f1_score'][-1]:.4f}")
 
         # Aggregate and return the final report summary
-        summary = {metrics: {"mean": np.mean(values),  "std": np.std(values)} for metric, values in metrics.items()}
+        summary = {
+            metric: {
+                "mean": np.mean(values), 
+                "std": np.std(values)
+            } 
+            for metric, values in metrics.items()
+        }
         return summary
     
 
 def print_report(model_name, summary):
     print(f"\n=============={model_name} EVALUATION REPORT ==============")
     for metric, stats in summary.items():
-        if np.isna(stats['mean']):
-            print(f"{metric.upper() < 12} : N/A")
+        if np.isnan(stats['mean']):
+            print(f"{metric.upper():<12} : N/A")
         else:
-            print(f"{metric.upper(): < 12} : {stats['mean']:.4f} (+/- {stats['std']:.4f})")
+            print(f"{metric.upper():<12} : {stats['mean']:.4f} (+/- {stats['std']:.4f})")
         
     print("=======================================================\n")

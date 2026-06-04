@@ -3,8 +3,8 @@ import sys
 
 # Import custom MLOps modules
 from src.data.data_validate import validate_schema
-from models.models import get_logistic_regression_pipeline, get_random_forest_pipeline
-from models.evaluate import evaluate_pipeline, print_report
+from src.models.models import get_logistic_regression_pipeline, get_random_forest_pipeline
+from src.models.evaluate import evaluate_pipeline, print_report
 
 def run_training_pipeline(data_path):
     # load the raw data
@@ -32,11 +32,12 @@ def run_training_pipeline(data_path):
     print("\n------------- Training Comparison Model: Random Forest Classifer---------")
     rf_pipeline = get_random_forest_pipeline()
     rf_summary = evaluate_pipeline(rf_pipeline, X, y)
-    print("Random Forest Classifer", rf_summary)
+    print_report("Random Forest Classifer", rf_summary)
 
-    if __name__ == "__main__":
-        # Expect data path as an execution argument
-        if len(sys.argv) > 1:
-            run_training_pipeline(sys.argv[1])
-        else:
-            print("❌ Usage Error: Please provide the path to the data file. Example: python train.py data/adult.csv")
+
+if __name__ == "__main__":
+    # Expect data path as an execution argument
+    if len(sys.argv) > 1:
+        run_training_pipeline(sys.argv[1])
+    else:
+        print("❌ Usage Error: Please provide the path to the data file. Example: python train.py data/adult.csv")

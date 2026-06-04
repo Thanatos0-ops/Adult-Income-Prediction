@@ -77,6 +77,8 @@ def validate_schema(df):
         print("Data Validation Successful! Dataset matches required schema and constraints.")
     else:
         print("Data Validation Failed. Review the errors above.")
+
+    return validation_passed
     
 
 if __name__ == "__main__":
