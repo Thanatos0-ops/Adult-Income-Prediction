@@ -1,0 +1,21 @@
+{
+    "model_type": "LightGBMClassifier",
+    "training_accuracy": 0.8731,
+    "target_f1_score": 0.7146,
+    "features_utilized": [
+        "age",
+        "workclass",
+        "fnlwgt",
+        "education",
+        "education.num",
+        "marital.status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "capital.gain",
+        "capital.loss",
+        "hours.per.week",
+        "native.country"
+    ]
+}
