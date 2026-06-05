@@ -1,10 +1,13 @@
 import pandas as pd
 import sys
+import warnings
 
 # Import custom MLOps modules
 from src.data.data_validate import validate_schema
-from src.models.models import get_logistic_regression_pipeline, get_random_forest_pipeline, get_xgboost_pipeline
+from src.models.models import get_logistic_regression_pipeline, get_random_forest_pipeline, get_xgboost_pipeline, get_lgbm_pipeline
 from src.models.evaluate import evaluate_pipeline, print_report
+
+warnings.filterwarnings('ignore')
 
 def run_training_pipeline(data_path):
     # load the raw data
@@ -40,6 +43,11 @@ def run_training_pipeline(data_path):
     xg_summary = evaluate_pipeline(xg_pipeline, X, y)
     print_report("XGBoost Classifier", xg_summary)
 
+    # Initialize and Validate LightGBM Classifer
+    print(f'\n---------------Training Boosting Model: LightGBM Classifier-----------')
+    lgbm_pipleline = get_lgbm_pipeline()
+    lgbm_summary = evaluate_pipeline(lgbm_pipleline, X, y)
+    print_report("LightGBM Classifier", lgbm_summary)
 
 if __name__ == "__main__":
     # Expect data path as an execution argument

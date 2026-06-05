@@ -31,7 +31,7 @@ def evaluate_pipeline(pipeline, X, y, n_splits=5, random_state=42):
 
         # Fit pipeline
         pipeline.fit(X_train, y_train)
-
+        
         # Predict
         y_pred = pipeline.predict(X_val)
 

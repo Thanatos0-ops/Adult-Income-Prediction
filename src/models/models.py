@@ -3,6 +3,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
 
 # Import the global preprocessor
 from src.data.base_transformations import preprocessor
@@ -24,4 +25,10 @@ def get_xgboost_pipeline():
     return Pipeline([
         ('preprocessor', preprocessor),
         ('classifier', XGBClassifier(n_estimators=200, learning_rate=0.1, max_depth=4, random_state=42, eval_metric='logloss'))
+    ])
+
+def get_lgbm_pipeline():
+    return Pipeline([
+        ('preprocessor', preprocessor),
+        ('classifier', LGBMClassifier(n_estimators=200, learning_rate=0.1, random_state=42, verbose=1))
     ])
