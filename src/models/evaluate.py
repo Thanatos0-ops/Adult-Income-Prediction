@@ -58,7 +58,7 @@ def evaluate_pipeline(pipeline, X, y, n_splits=5, random_state=42):
             } 
             for metric, values in metrics.items()
         }
-        return summary
+    return summary
     
 
 def print_report(model_name, summary):

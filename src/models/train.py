@@ -3,7 +3,7 @@ import sys
 
 # Import custom MLOps modules
 from src.data.data_validate import validate_schema
-from src.models.models import get_logistic_regression_pipeline, get_random_forest_pipeline
+from src.models.models import get_logistic_regression_pipeline, get_random_forest_pipeline, get_xgboost_pipeline
 from src.models.evaluate import evaluate_pipeline, print_report
 
 def run_training_pipeline(data_path):
@@ -33,6 +33,12 @@ def run_training_pipeline(data_path):
     rf_pipeline = get_random_forest_pipeline()
     rf_summary = evaluate_pipeline(rf_pipeline, X, y)
     print_report("Random Forest Classifer", rf_summary)
+
+    # Initialize and Validate XGBoost Classifier
+    print(f'\n-------------Training Boosting Model: XGBoost Classifier----------')
+    xg_pipeline = get_xgboost_pipeline()
+    xg_summary = evaluate_pipeline(xg_pipeline, X, y)
+    print_report("XGBoost Classifier", xg_summary)
 
 
 if __name__ == "__main__":

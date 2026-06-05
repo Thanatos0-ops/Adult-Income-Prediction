@@ -2,6 +2,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
 
 # Import the global preprocessor
 from src.data.base_transformations import preprocessor
@@ -17,4 +18,10 @@ def get_random_forest_pipeline():
     return Pipeline([
         ('preprocessor', preprocessor),
         ('classifer', RandomForestClassifier(random_state=42, n_jobs=-1)) # n_jobs controls how many CPU cores are use in parallel for operations such as training,(1 = one core, 2 = two cores, -1 = all availabe cores)
+    ])
+
+def get_xgboost_pipeline():
+    return Pipeline([
+        ('preprocessor', preprocessor),
+        ('classifier', XGBClassifier(n_estimators=200, learning_rate=0.1, max_depth=4, random_state=42, eval_metric='logloss'))
     ])
